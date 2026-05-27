@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIH | Make the Page</title>
+    <style>
+        details{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        details summary{
+            border: 2px solid #000000;
+            width: fit-content;
+            margin: 10px auto;
+            border-radius: 5px;
+            padding: 10px 10px;
+        }
+        .form {
+            text-align: center;
+        }
+        .form p{
+            color: #000000;
+            background-color: transparent;
+            border-radius: 5px;
+            border: 1px solid #747474;
+            padding: 5px 10px;
+            width: fit-content;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .form select {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid #424141;
+        }
+    </style>
+</head>
+<body>
+    <details>
+        <summary>Make your Bio-site</summary>
+            <form class="form">
+                <p>1. Enter your name</p>
+                <input type="text" placeholder="name...">
+                <p>2. Enter bio-site title you want</p>
+                <input type="text" placeholder="title...">
+                <p>3. Which layout you prefer?</p>
+                <input type="radio" name="layout" id="style1" value="minimalist">
+                <label for="style1">Minimalist</label><br>
+                <input type="radio" name="layout" id="style2" value="futuristic">
+                <label for="style2">Futuristic</label><br>
+                <input type="radio" name="layout" id="style3" value="pitchdeck">
+                <label for="style3">Pitch Deck</label><br>
+                <input type="radio" name="layout" id="style4" value="creative">
+                <label for="style4">Creative</label><br>
+                <input type="radio" name="layout" id="style5" value="business">
+                <label for="style5">Business-style</label><br>
+                <p>4. Write the feature you wanna show on your bio-site</p>
+                <textarea placeholder="features..."></textarea>
+                <button type="submit">Submit</button>
+            </form>            
+    </details>
+</body>
+</html>
