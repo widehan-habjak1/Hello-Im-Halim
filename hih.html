@@ -27,6 +27,10 @@
 
         <div class="page">
             <header class="hero">
+                <a class="hero-brand" href="hih.html" aria-label="HIH Home">
+                    <img src="HIH-mark.png" alt="" width="40" height="40">
+                    <span>HALIM</span>
+                </a>
                 <nav class="top-nav" aria-label="Quick navigation">
                     <a href="hih-about.html">About</a>
                     <a href="hih-projects.html">Portfolio</a>
@@ -34,25 +38,34 @@
                     <a href="mailto:mhalimawwah@gmail.com">Email</a>
                 </nav>
 
-                <div class="hero-grid">
+                <div class="hero-stage">
+                    <div class="hero-rail" aria-hidden="true">
+                        <span>Career digital portfolio</span>
+                        <span class="hero-rail-line"></span>
+                        <span>2026</span>
+                    </div>
                     <div class="hero-copy">
-                        <p class="eyebrow">UI/UX Programmer · History Enthusiast</p>
-                        <h1>Hi, I'm Halim</h1>
+                        <h1 lang="en" translate="no"><span>Hi, I'm</span> <span>Halim</span></h1>
+                        <p class="hero-tagline">UI/UX Programmer · History Enthusiast</p>
                         <p class="hero-text">A Korean-born Indonesian Muslim student building a career portfolio through programming, science, languages, and creative projects.</p>
                         <div class="hero-actions">
-                            <a class="button primary" href="hih-about.html">View Profile</a>
-                            <a class="button" href="hih-projects.html">See Work</a>
+                            <a href="hih-about.html">View Profile <span aria-hidden="true">&#8599;</span></a>
+                            <a href="hih-projects.html">See Work <span aria-hidden="true">&#8599;</span></a>
                         </div>
                     </div>
 
-                    <div class="hero-card" aria-label="HIH identity mark">
-                        <img src="HIH-mark.png" alt="HIH logo">
+                    <div class="hero-art">
+                        <img src="HIH-mark.png" alt="Halim's H monogram" width="500" height="500" fetchpriority="high">
                     </div>
+                </div>
+                <div class="hero-bottom">
+                    <a class="hero-scroll" href="#recent-activity">Scroll down <span aria-hidden="true">&#8595;</span></a>
+                    <span>Seoul, Korea</span>
                 </div>
             </header>
 
             <main>
-                <section class="section">
+                <section class="section" id="recent-activity">
                     <div class="section-heading">
                         <div>
                             <p class="eyebrow">Latest</p>
@@ -159,11 +172,12 @@
             </main>
 
             <footer>
-                <p>HIH 2.1</p>
+                <p>HIH 3.0</p>
                 <p><a href="mailto:mhalimawwah@gmail.com">mhalimawwah@gmail.com</a> / IG @hxl.608</p>
             </footer>
         </div>
     </div>
+    <script src="hih-language.js"></script>
     <script src="hih_howitworks.js"></script>
 </body>
 </html>

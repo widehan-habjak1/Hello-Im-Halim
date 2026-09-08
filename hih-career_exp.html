@@ -28,16 +28,16 @@
         <div class="page">
             <header class="page-header">
                 <p class="eyebrow">03. Career Learning</p>
-                <h1>Career Archive</h1>
-                <p>진로 시간 학습지와 탐색 기록을 모아두는 페이지입니다.</p>
+                <h1>Career Class Archive</h1>
+                <p>진로 시간 때 배워둔 학습지와 탐색 기록을 모아두는 페이지입니다.</p>
             </header>
 
             <main>
                 <section class="section">
                     <div class="dashboard-tabs">
-                        <span class="active">Career Exploration</span>
-                        <span>Academic Interests</span>
-                        <span>Learning Archive</span>
+                        <span class="active" data-category="Learning Archive">진로 시간 학습지</span>
+                        <span data-category="Academic Interests">관심사와 특기</span>
+                        <span data-category="Career Exploration">진로 탐색</span>
                     </div>
 
                     <form class="archive-form" aria-label="Add career worksheet">
@@ -52,6 +52,22 @@
                         <label>
                             Description
                             <input type="text" name="worksheetDescription" placeholder="예: 나의 관심 직업 정리" required>
+                        </label>
+                        <label>
+                            Category
+                            <select name="worksheetCategory" required>
+                                <option value="Career Exploration">진로 탐색</option>
+                                <option value="Academic Interests">취미 및 특기</option>
+                                <option value="Learning Archive">진로 시간 학습지</option>
+                            </select>
+                        </label>
+                        <label>
+                            Semester
+                            <select name="worksheetSemester" required>
+                                <option value="2026 1학기">2026 1학기</option>
+                                <option value="2026 2학기">2026 2학기</option>
+                                <option value="2025 2학기">2025 2학기</option>
+                            </select>
                         </label>
                         <label>
                             Date
@@ -77,11 +93,12 @@
             </main>
 
             <footer>
-                <p>HIH 2.1</p>
+                <p>HIH 3.0</p>
                 <p><a href="mailto:mhalimawwah@gmail.com">mhalimawwah@gmail.com</a> / IG @hxl.608</p>
             </footer>
         </div>
     </div>
+    <script src="hih-language.js"></script>
     <script src="hih_howitworks.js"></script>
 </body>
 </html>
