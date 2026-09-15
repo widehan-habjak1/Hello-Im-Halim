@@ -876,7 +876,25 @@ footer {
     aspect-ratio: 4 / 3;
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    background: linear-gradient(135deg, var(--tertiary), #e8e8e8);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(224, 224, 224, 0.55)),
+        repeating-linear-gradient(135deg, transparent 0 12px, rgba(34, 34, 34, 0.05) 12px 13px);
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+}
+
+.project-thumb::after {
+    color: var(--secondary);
+    content: attr(data-project-label);
+    font-size: 11px;
+    text-align: center;
+}
+
+.project-thumb.has-image::after {
+    content: "";
 }
 
 .project-tags {

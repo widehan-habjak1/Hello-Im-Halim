@@ -692,6 +692,16 @@ document.querySelectorAll(".project-row").forEach((project) => {
     });
 });
 
+document.querySelectorAll(".project-thumb[data-project-image]").forEach((thumb) => {
+    const image = new Image();
+    const source = thumb.dataset.projectImage;
+    image.addEventListener("load", () => {
+        thumb.style.backgroundImage = `url("${source}")`;
+        thumb.classList.add("has-image");
+    });
+    image.src = source;
+});
+
 // ==============================
 // 12. Growth Journey 데이터
 // ==============================
