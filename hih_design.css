@@ -1525,19 +1525,21 @@ footer a {
 
 .journey-layout {
     display: grid;
-    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
-    gap: 26px;
+    gap: 34px;
 }
 
 .journey-list {
-    border-left: 1px solid var(--primary);
+    border-top: 1px solid var(--primary);
     display: grid;
-    gap: 18px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0;
     list-style: none;
-    padding-left: 24px;
+    padding: 0;
 }
 
 .journey-list li {
+    min-width: 0;
+    padding: 38px 18px 0 0;
     position: relative;
 }
 
@@ -1547,9 +1549,9 @@ footer a {
     border-radius: 50%;
     content: "";
     height: 10px;
-    left: -30px;
+    left: 0;
     position: absolute;
-    top: 8px;
+    top: -6px;
     width: 10px;
 }
 
@@ -1565,6 +1567,7 @@ footer a {
     color: var(--secondary);
     display: block;
     font-size: 13px;
+    margin-bottom: 8px;
 }
 
 .journey-detail {
@@ -1759,6 +1762,11 @@ footer a {
 
     .worksheet-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        row-gap: 24px;
     }
 }
 
