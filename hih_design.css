@@ -848,6 +848,13 @@ footer {
     width: 54px;
 }
 
+.certificate-card .medal-word {
+    border-radius: 999px;
+    min-width: 54px;
+    padding: 0 12px;
+    width: max-content;
+}
+
 .project-list {
     border-top: 1px solid var(--line);
     max-width: 980px;
