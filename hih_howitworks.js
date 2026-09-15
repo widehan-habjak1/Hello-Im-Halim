@@ -624,32 +624,32 @@ document.querySelectorAll(".project-row").forEach((project) => {
 // 타임라인 날짜를 클릭했을 때 오른쪽 상세 카드에 들어갈 내용입니다.
 const journeyDetails = {
     "2026.03": {
-        title: "2026.03 진로 탐색 시작",
+        title: "2026.03 Career exploration started - returning to programming",
         activity: "진로 학습지를 통해 관심 분야와 목표를 정리하기 시작했습니다.",
         lesson: "막연한 관심사를 글로 정리하면 다음 행동을 더 쉽게 정할 수 있다는 점을 배웠습니다."
     },
     "2026.04": {
-        title: "2026.04 웹 개발 관심 시작",
+        title: "2026.04 Interest in web development",
         activity: "HTML, CSS, JavaScript를 사용해 화면을 구성하는 방법에 더 집중했습니다.",
         lesson: "디자인과 코딩은 따로가 아니라 같은 사용자 경험을 만드는 과정이라는 점을 알게 되었습니다."
     },
     "2026.05": {
-        title: "2026.05 React 학습 시작",
+        title: "2026.05 React learning began",
         activity: "컴포넌트 단위로 화면을 나누고 상태를 관리하는 방식을 공부했습니다.",
         lesson: "큰 화면도 작은 단위로 나누면 더 차분하게 만들 수 있다는 점을 배웠습니다."
     },
     "2026.06": {
-        title: "2026.06 첫 프로젝트 경험",
+        title: "2026.06 First project experience - Seoul Donghaeng Plaza kiosk",
         activity: "서울동행플라자 키오스크 프로젝트를 진행하며 UI 구조와 사용자 흐름을 고민했습니다.",
         lesson: "프로젝트는 예쁜 화면뿐 아니라 실제 사람이 쉽게 사용할 수 있는 구조가 중요합니다."
     },
     "2026.07": {
-        title: "2026.07 AI / 컴퓨터공학 탐구",
+        title: "2026.07 AI / computer science exploration",
         activity: "AI, 알고리즘, 컴퓨터 구조 등 관심 주제를 넓혀 탐구했습니다.",
         lesson: "도구를 잘 쓰려면 원리와 구조를 함께 이해해야 한다는 점을 느꼈습니다."
     },
     "2026.08": {
-        title: "2026.08 진로 포트폴리오 구축",
+        title: "2026.08 Building a career portfolio",
         activity: "HIH를 진로 디지털 포트폴리오로 발전시키며 내 기록을 웹으로 정리했습니다.",
         lesson: "나의 성장 과정을 직접 디자인하면 내가 어디로 가고 있는지 더 선명해집니다."
     }
@@ -673,9 +673,8 @@ document.querySelectorAll(".journey-list li").forEach((item) => {
         document.querySelectorAll(".journey-list li").forEach((li) => li.classList.remove("current"));
         item.classList.add("current");
         panel.querySelector("h2").textContent = t(detail.title);
-        const paragraphs = panel.querySelectorAll("p");
-        paragraphs[1].textContent = t(detail.activity);
-        paragraphs[2].textContent = t(detail.lesson);
+        panel.querySelector(".journey-activity").textContent = t(detail.activity);
+        panel.querySelector(".journey-lesson").textContent = t(detail.lesson);
         if (notify) showToast("{date} journey selected", { date });
     };
 
