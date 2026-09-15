@@ -1309,6 +1309,33 @@ footer a {
     margin-top: 4px;
 }
 
+.archive-tools {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.archive-tools button,
+.archive-tools .archive-import {
+    min-width: 0;
+    margin: 0;
+}
+
+.archive-tools .archive-import {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 16px;
+    cursor: pointer;
+    display: block;
+}
+
+.archive-tools input[type="file"] {
+    display: none;
+}
+
 .archive-list {
     border: 1px solid var(--line);
     border-radius: 999px;

@@ -218,36 +218,11 @@ const saveStoredWorksheets = (worksheets) => {
     localStorage.setItem(worksheetStorageKey, JSON.stringify(worksheets));
 };
 
-// localStorage에는 카드 정보, IndexedDB에는 실제 파일이 저장됩니다.
-// 그래서 파일이 필요한 카드인데 IndexedDB 파일이 사라졌다면 카드 정보도 같이 정리합니다.
+// 카드 정보는 localStorage, 실제 파일은 IndexedDB에 저장됩니다.
+// 파일이 없어져도 카드 정보는 보존해서 자료 자체가 사라지지 않게 합니다.
 const getValidStoredWorksheets = async () => {
     const worksheets = getStoredWorksheets();
-
-    if (!worksheets.some((worksheet) => worksheet.fileName)) {
-        return worksheets;
-    }
-
-    const checkedWorksheets = await Promise.all(worksheets.map(async (worksheet) => {
-        if (!worksheet.fileName) {
-            return worksheet;
-        }
-
-        try {
-            const storedFile = await getWorksheetFile(worksheet.id);
-            return storedFile ? worksheet : null;
-        } catch {
-            return null;
-        }
-    }));
-
-    const validWorksheets = checkedWorksheets.filter(Boolean);
-
-    if (validWorksheets.length !== worksheets.length) {
-        saveStoredWorksheets(validWorksheets);
-        showToast("Missing file cards were removed");
-    }
-
-    return validWorksheets;
+    return worksheets;
 };
 
 // 각 학습지를 구분하기 위한 고유 ID를 만듭니다.
@@ -297,9 +272,105 @@ const getWorksheetFile = async (id) => {
     });
 };
 
+const fileToDataUrl = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result));
+    reader.addEventListener("error", () => reject(reader.error));
+    reader.readAsDataURL(file);
+});
+
+const dataUrlToBlob = async (dataUrl) => {
+    const response = await fetch(dataUrl);
+    return response.blob();
+};
+
+const exportArchive = async () => {
+    const worksheets = getStoredWorksheets();
+    const backupWorksheets = [];
+
+    for (const worksheet of worksheets) {
+        let fileData = "";
+        if (worksheet.fileName) {
+            const storedFile = await getWorksheetFile(worksheet.id);
+            if (storedFile) fileData = await fileToDataUrl(storedFile);
+        }
+        backupWorksheets.push({ ...worksheet, backupFileData: fileData });
+    }
+
+    const backup = {
+        format: "hih-career-archive",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        worksheets: backupWorksheets
+    };
+    const blob = new Blob([JSON.stringify(backup)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `hih-career-archive-${new Date().toISOString().slice(0, 10)}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    showToast("Archive backup downloaded");
+};
+
+const importArchive = async (file) => {
+    const backup = JSON.parse(await file.text());
+    if (backup.format !== "hih-career-archive" || !Array.isArray(backup.worksheets)) {
+        throw new Error("Invalid archive backup");
+    }
+
+    const worksheets = getStoredWorksheets();
+    for (const item of backup.worksheets) {
+        const worksheet = {
+            id: makeId(),
+            title: String(item.title || ""),
+            description: String(item.description || ""),
+            category: String(item.category || "Learning Archive"),
+            semester: String(item.semester || "2026 1학기"),
+            date: String(item.date || ""),
+            fileName: String(item.fileName || ""),
+            fileType: String(item.fileType || ""),
+            fileData: "",
+            fileLabel: String(item.fileLabel || "DOC")
+        };
+
+        if (item.backupFileData && worksheet.fileName) {
+            const restoredFile = await dataUrlToBlob(item.backupFileData);
+            await storeWorksheetFile(worksheet.id, restoredFile);
+        }
+        worksheets.push(worksheet);
+    }
+
+    saveStoredWorksheets(worksheets);
+    await renderStoredWorksheets();
+    showToast("Archive restored");
+};
+
 const worksheetGrid = document.querySelector(".worksheet-grid");
 const archiveList = document.querySelector(".archive-list");
 const archiveForm = document.querySelector(".archive-form");
+const archiveExportButton = document.querySelector("[data-archive-action='export']");
+const archiveImportInput = document.querySelector("[data-archive-import]");
+
+archiveExportButton?.addEventListener("click", async () => {
+    try {
+        await exportArchive();
+    } catch {
+        showToast("Could not export this archive");
+    }
+});
+
+archiveImportInput?.addEventListener("change", async () => {
+    const [file] = archiveImportInput.files || [];
+    if (!file) return;
+
+    try {
+        await importArchive(file);
+    } catch {
+        showToast("Could not restore this archive");
+    }
+    archiveImportInput.value = "";
+});
 
 // 현재 필터 결과가 비어 있으면 empty-state 문구를 보여줍니다.
 const updateWorksheetEmptyState = () => {
@@ -550,6 +621,9 @@ if (archiveForm && worksheetGrid) {
         if (file && file.size > 0) {
             try {
                 await storeWorksheetFile(worksheet.id, file);
+                if (!(await getWorksheetFile(worksheet.id))) {
+                    throw new Error("File verification failed");
+                }
             } catch {
                 showToast("Could not save this file in the browser");
                 return;

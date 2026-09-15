@@ -78,6 +78,13 @@
                             <input type="file" name="worksheetFile" accept=".pdf,image/*">
                         </label>
                         <button type="submit">Add to Archive</button>
+                        <div class="archive-tools">
+                            <button type="button" data-archive-action="export">Export Archive</button>
+                            <label class="archive-import">
+                                Import Archive
+                                <input type="file" data-archive-import accept="application/json,.json">
+                            </label>
+                        </div>
                     </form>
 
                     <div class="career-layout">
