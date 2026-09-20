@@ -3,6 +3,8 @@
 
     // 1. 번역 사전: [영어, 한국어] 순서입니다. 새 문구도 여기에 추가합니다.
     // HTML에 원래 한국어로 적힌 문구도 양쪽 언어로 찾을 수 있습니다.
+    // 자주 수정하는 글은 [영어, 한국어, "고정키"]와 HTML의 data-i18n="고정키"로 연결합니다.
+    // 앞의 두 문구는 자유롭게 수정하되 고정키는 유지하세요. 줄바꿈은 <br>로 넣습니다.
     const messages = [
         ["Home", "홈"],
         ["About Me", "나의 소개"],
@@ -29,12 +31,21 @@
         ["Language", "언어"],
         ["Close", "닫기"],
         ["UI/UX Programmer · History Enthusiast", "UI/UX 개발자 · 역사 덕후"],
-        ["A Korean-born Indonesian Muslim student building a career portfolio through programming, science, languages, and creative projects.", "한국에서 태어난 인도네시아 무슬림 학생. 프로그래밍, 과학, 언어, 역사 프로젝트를 통해 포트폴리오를 쌓아가는 중."],
+        ["A Korean-born Indonesian Muslim student building his life through programming, science, languages, and some cool projects.", "한국에서 태어난 인도네시아 무슬림 학생. 프로그래밍, 과학, 언어, 역사 프로젝트를 통해 포트폴리오를 쌓아가는 중.", "home.hero"],
         ["View Profile", "프로필 보기"],
         ["See Work", "프로젝트 보기"],
         ["Scroll down", "아래로"],
         ["Latest", "최근 소식"],
         ["Recent Activity", "최근 활동"],
+        ["Tools I Use", "사용하는 도구"],
+        ["My Stacks", "나의 개발 스택"],
+        ["Languages and tools I keep building with.", "계속해서 익히고 직접 만들어가는 언어와 도구."],
+        ["Programming language", "프로그래밍 언어"],
+        ["Web structure", "웹 구조"],
+        ["Visual systems", "비주얼 시스템"],
+        ["Interactive web", "인터랙티브 웹"],
+        ["Logic and data", "로직과 데이터"],
+        ["Frontend components", "프론트엔드 컴포넌트"],
         ["Project", "프로젝트"],
         ["Learning", "학습"],
         ["Certificate", "자격증"],
@@ -42,7 +53,18 @@
         ["AI-POT", "AI-POT 자격증"],
         ["Profile", "프로필"],
         ["About Halim", "할림은 처음이지?"],
-        ["I study in Korea while keeping my Indonesian identity close. My goal is to grow into a creator who can connect technology, learning, and real people.", "인도네시아 정체성을 간직한 채 한국에서 초·중·고등학교에 다니는 중. 배움과 지식, 사람을 연결하는 창작자를 목표로 하는 중."],
+        ["📜 Knowledge Seeker", "📜 지식의 추구자", "keyword.knowledge"],
+        ["🧩 Master Problem-Solver", "🧩 문제 해결의 달인", "keyword.problemSolver"],
+        ["🧭 Pathfinder", "🧭 미지의 탐험가", "keyword.pathfinder"],
+        ["🧠 Deep Thinker", "🧠 깊은 사유의 현자", "keyword.thinker"],
+        ["💻 Full-Vibe Stack UI/UX Developer", "💻 풀 바이브 스택 UI/UX 개발자", "keyword.developer"],
+        ["🔭 Visionary Planner", "🔭 미래를 바라보는 비저너", "keyword.visionary"],
+        ["⚡ Innovation Vanguard", "⚡ 혁신의 개척자", "keyword.innovation"],
+        ["🌐 Open-Minded Soul", "🌐 열린 사고의 탐구자", "keyword.openMinded"],
+        ["🔗 World Connector", "🔗 세계를 잇는 연결자", "keyword.connector"],
+        ["Me? a city boy who grew up between two worlds, carrying my Indonesian roots while being shaped by life in Korea. Along the way, I’m exploring knowledge, technology, and creativity. Not just to learn, but to build things that can make a good impact for the world.<br><br>Remember, 'The best of people are those who are most beneficial to people.'", "할림은 한국과 인도네시아 사이에서 자라난 한 도시 소년. 한국에서 태어난 인도네시아 사람으로, 뭔가 배우는 것을 좋아하고 그걸 응용하는 게 재밌는 특기를 가지고 있다. 나중에 세상에 선한 영향력을 만드리라 다짐하고 현재 꿈과 비전을 향해 달려가고 있다.<br><br>기억하라, '사람들에게 가장 유익한 사람이 가장 좋은 사람이다.'", "home.bio"],
+        ["Me? a city boy who grew up between two worlds, carrying my Indonesian roots while being shaped by life in Korea. Along the way, I’m exploring knowledge, technology, and creativity. Not just to learn, but to build things that can make a good impact for the world.<br><br>Remember, 'The best of people are those who are most beneficial to people.'", "할림은 한국과 인도네시아 사이에서 자라난 한 도시 소년. 한국에서 태어난 인도네시아 사람으로, 뭔가 배우는 것을 좋아하고 그걸 응용하는 게 재밌는 특기를 가지고 있다. 나중에 세상에 선한 영향력을 만드리라 다짐하고 현재 꿈과 비전을 향해 달려가고 있다.<br><br>기억하라, '사람들에게 가장 유익한 사람이 가장 좋은 사람이다.'", "about.bio"],
+        ["Remember, 'The best of people are those who are most beneficial to people.'", "기억하라, '사람들에게 가장 유익한 사람이 가장 좋은 사람이다.'"],
         ["Languages", "사용 언어"],
         ["Portfolio Works", "포트폴리오 작품"],
         ["Career Growth", "진로 여정"],
@@ -168,7 +190,7 @@
         ["Project Detail", "프로젝트 상세"],
         ["{description} Tags: {tags}.", "{description} 사용 기술: {tags}."],
         ["View Growth", "성장 여정 보기"],
-        ["A space to reflect on monthly growth and record what I have learned.", "월별 성장 과정을 돌아보고, 배운 점을 기록하는 공간."],
+        ["A space to reflect on monthly growth and record what I have learned.", "월별 성장 과정을 돌아보고, 배운 점을 기록하는 공간.", "growth.intro"],
         ["Started taking an interest in web development", "웹 개발에 관심을 가지기 시작"],
         ["AI / computer science exploration", "AI / 컴퓨터공학 탐구"],
         ["Building a career portfolio", "진로 포트폴리오 구축"],
@@ -185,6 +207,7 @@
         ["2026.03 Career exploration started", "2026.03 진로 탐색 시작"],
         ["2026.03 Career exploration started - returning to programming", "2026.03 진로 탐색 시작 - 프로그래밍 복귀"],
         ["2026.04 Interest in web development", "2026.04 웹 개발 관심 시작"],
+        ["2026.04 Web development learning started - HTML CSS JS", "2026.04 웹 개발을 배우기 시작 - HTML CSS JS"],
         ["2026.05 React learning began", "2026.05 React 학습 시작"],
         ["2026.05 React learning began - frontend development", "2026.05 React 배우기 시작 - 프론트엔드"],
         ["2026.06 First project experience", "2026.06 첫 프로젝트 경험"],
@@ -192,6 +215,8 @@
         ["2026.07 First hackathon - 2026 Chuncheon Data Utilization Hackathon", "2026.07 첫 해커톤 대회 - 2026 춘천시 데이터활용 해커톤"],
         ["2026.08 CPU-GPU research", "2026.08 CPU-GPU 연구"],
         ["2026.09 Building an AI agent", "2026.09 AI 에이전트 구축"],
+        ["AI agent가 정보를 이해하고 도구를 사용하며 작업을 이어가는 과정을 설계하고 작은 프로토타입으로 실험했습니다.", "I designed and tested a small AI agent that understands information, uses tools, and continues a task."],
+        ["AI를 잘 활용하려면 질문을 만드는 능력뿐 아니라 목표, context, 검증 과정을 함께 설계해야 한다는 점을 배웠습니다.", "I learned that using AI well requires more than writing good questions: the goal, context, and verification process must also be designed."],
         ["I started organizing my interests and goals through career worksheets.", "진로 학습지를 통해 정리하기 시작한 관심 분야와 목표."],
         ["Writing down vague interests makes it easier to choose the next step.", "막연한 관심사를 글로 정리하며 배운 점. 다음 행동을 더 쉽게 선택하는 방법."],
         ["I joined the Chuncheon Data Utilization Hackathon and turned an idea into a service with my team under a tight deadline.", "팀과 함께 참여한 춘천시 데이터활용 해커톤. 제한된 시간 안에 아이디어를 서비스로 구체화한 경험."],
@@ -242,16 +267,17 @@
     ];
 
     // 번호가 붙은 페이지 제목도 같은 사전을 사용합니다.
-    ["About Me", "Career Learning", "Skills & Activities", "Projects", "Growth Journey", "Bio Site"]
+    ["About Halim", "Career Learning", "Skills & Activities", "Projects", "Growth Journey", "Bio Site"]
         .forEach((title, index) => {
             const korean = messages.find(([english]) => english === title)[1];
             messages.push([`0${index + 2}. ${title}`, `0${index + 2}. ${korean}`]);
         });
 
     const dictionary = new Map();
-    messages.forEach(([en, ko]) => {
+    messages.forEach(([en, ko, key]) => {
         dictionary.set(en, { en, ko });
         dictionary.set(ko, { en, ko });
+        if (key) dictionary.set(key, { en, ko });
     });
 
     // 2. 언어 선택만 저장합니다. 학습지 DB나 사용자가 쓴 내용은 수정하지 않습니다.
@@ -276,13 +302,30 @@
             Object.hasOwn(values, key) ? String(values[key]) : match);
     };
 
-    // 3. 처음 HTML에 들어 있던 문구만 등록합니다. innerHTML을 다시 만들지 않으므로
-    // 링크, 이벤트, 입력 중인 폼 값은 유지됩니다. 동적 UI는 별도로 t()를 호출합니다.
+    // 3. 고정키는 문장이 아닌 이름으로 번역을 찾으므로 HTML 원문과 달라도 작동합니다.
+    // data-i18n은 텍스트와 <br>만 있는 요소에 사용하세요. 링크나 폼의 부모에는 붙이지 않습니다.
     const bindings = [];
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (!dictionary.has(key) || element.closest("[translate='no']")) return;
+        bindings.push(() => {
+            if (!element.isConnected) return;
+            const fragment = document.createDocumentFragment();
+            // <br>만 줄바꿈으로 허용하고 나머지는 텍스트로 넣어 HTML 실행을 막습니다.
+            t(key).split(/<br\s*\/?\s*>/i).forEach((part, index) => {
+                if (index) fragment.append(document.createElement("br"));
+                fragment.append(document.createTextNode(part));
+            });
+            element.replaceChildren(fragment);
+        });
+    });
+
+    // 기존의 짧은 문구는 텍스트 노드만 갱신해 링크, 이벤트와 폼 값을 유지합니다.
+    // 사용자 업로드 내용은 등록하지 않으며 동적 UI는 별도로 t()를 호출합니다.
     const walker = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
         const node = walker.currentNode;
-        if (node.parentElement.closest("script, style, textarea, [translate='no']")) continue;
+        if (node.parentElement.closest("script, style, textarea, [translate='no'], [data-i18n]")) continue;
         const source = node.data.trim();
         if (!dictionary.has(source)) continue;
         const leading = node.data.match(/^\s*/)[0];

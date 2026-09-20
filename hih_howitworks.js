@@ -7,9 +7,7 @@ const t = (message, values = {}) => {
         Object.hasOwn(values, key) ? String(values[key]) : match);
 };
 
-// ==============================
 // 1. 스크롤 등장 애니메이션 대상
-// ==============================
 // 아래 선택자에 해당하는 요소들은 화면에 들어올 때 reveal 애니메이션이 붙습니다.
 const revealSelectors = [
     ".hero-copy",
@@ -700,6 +698,23 @@ document.querySelectorAll(".project-thumb[data-project-image]").forEach((thumb) 
         thumb.classList.add("has-image");
     });
     image.src = source;
+});
+
+// 프로젝트 카테고리 탭은 각 행의 data-project-category와 연결됩니다.
+const projectFilters = document.querySelectorAll("[data-project-filter]");
+const projectRows = document.querySelectorAll(".project-row[data-project-category]");
+projectFilters.forEach((filter) => {
+    filter.addEventListener("click", () => {
+        const category = filter.dataset.projectFilter;
+        projectFilters.forEach((button) => {
+            const selected = button === filter;
+            button.classList.toggle("active", selected);
+            button.setAttribute("aria-pressed", String(selected));
+        });
+        projectRows.forEach((project) => {
+            project.hidden = project.dataset.projectCategory !== category;
+        });
+    });
 });
 
 // ==============================
